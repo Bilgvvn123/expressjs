@@ -10,9 +10,9 @@ exports.getBlogs = async (req, res) => {
 			blogs: "data bhq bna.",
 		});
 
-	return res.json({
+	return res.status(200).json({
 		success: true,
-		blogs: blogs,
+		blogs,
 	});
 };
 
@@ -51,7 +51,7 @@ exports.getBlog = async (req, res) => {
 
 		return res.json({
 			success: true,
-			blog: blog,
+			blog,
 		});
 	} catch (err) {
 		console.log(err);
@@ -60,12 +60,11 @@ exports.getBlog = async (req, res) => {
 
 exports.deleteBlog = async (req, res) => {
 	const { id } = req.params;
-	console.log(req.params);
 
 	try {
-		const blog = await Blog.findById(id);
+		const deletedBlog = await Blog.findByIdAndDelete(id);
 
-		if (!blog)
+		if (!deletedBlog)
 			return res.json({
 				success: false,
 				error: "id-gaa shalgana uu",
@@ -73,7 +72,7 @@ exports.deleteBlog = async (req, res) => {
 
 		return res.json({
 			success: true,
-			blog: blog,
+			deletedBlog,
 		});
 	} catch (err) {
 		console.log(err);
