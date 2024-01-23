@@ -1,4 +1,5 @@
 // npm i morgan rotating-file-stream
+// npm i bcrypt
 
 var express = require("express");
 var morgan = require("morgan");
@@ -9,6 +10,7 @@ const dotenv = require("dotenv");
 
 const connectDb = require("./config/dbConnect");
 const blogsRoutes = require("./routes/blogs");
+const usersRoutes = require("./routes/users");
 
 const port = process.env.PORT || 2030;
 // env
@@ -50,6 +52,12 @@ const log = (req, res, next) => {
 // 	next();
 // };
 
+const manaljaw = (req, res, next) => {
+	req.name = "dasda";
+
+	next();
+};
+
 // middlewares
 app.use(express.json());
 // app.use(login);
@@ -57,6 +65,7 @@ app.use(express.json());
 app.use(log);
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use("/blogs", blogsRoutes);
+app.use("/users", usersRoutes);
 
 app.listen(port, () => {
 	console.log(`Manai server ${port} port deer aslaa.`.rainbow.bold);

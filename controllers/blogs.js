@@ -1,19 +1,27 @@
 const Blog = require("../models/Blog");
 
 exports.getBlogs = async (req, res) => {
-	// select * from blogs
-	const blogs = await Blog.find();
+	console.log(req.name);
+	try {
+		// select * from blogs
+		const blogs = await Blog.find();
 
-	if (!blogs)
-		return res.json({
-			success: false,
-			blogs: "data bhq bna.",
+		if (!blogs)
+			return res.status(400).json({
+				success: false,
+				blogs: "data bhq bna.",
+			});
+
+		return res.status(200).json({
+			success: true,
+			blogs,
 		});
-
-	return res.status(200).json({
-		success: true,
-		blogs,
-	});
+	} catch (err) {
+		res.status(500).json({
+			success: false,
+			error: err,
+		});
+	}
 };
 
 exports.createBlog = async (req, res) => {
@@ -21,18 +29,21 @@ exports.createBlog = async (req, res) => {
 		const blog = await Blog.create(req.body);
 
 		if (!blog)
-			return res.json({
+			return res.status(400).json({
 				success: false,
 				error: "data nemegdsengvi.",
 			});
 
-		return res.json({
+		return res.status(200).json({
 			success: true,
 			blog: "amjilttai nemegdlee",
 			data: blog,
 		});
 	} catch (err) {
-		console.log(err.message.red);
+		res.status(500).json({
+			success: false,
+			error: err,
+		});
 	}
 };
 
@@ -44,17 +55,20 @@ exports.getBlog = async (req, res) => {
 		const blog = await Blog.findById(id);
 
 		if (!blog)
-			return res.json({
+			return res.status(400).json({
 				success: false,
 				error: "id-gaa shalgana uu",
 			});
 
-		return res.json({
+		return res.status(200).json({
 			success: true,
 			blog,
 		});
 	} catch (err) {
-		console.log(err);
+		res.status(500).json({
+			success: false,
+			error: err,
+		});
 	}
 };
 
@@ -65,16 +79,19 @@ exports.deleteBlog = async (req, res) => {
 		const deletedBlog = await Blog.findByIdAndDelete(id);
 
 		if (!deletedBlog)
-			return res.json({
+			return res.status(400).json({
 				success: false,
 				error: "id-gaa shalgana uu",
 			});
 
-		return res.json({
+		return res.status(200).json({
 			success: true,
 			deletedBlog,
 		});
 	} catch (err) {
-		console.log(err);
+		res.status(500).json({
+			success: false,
+			error: err,
+		});
 	}
 };
