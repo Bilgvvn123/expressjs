@@ -24,29 +24,6 @@ exports.getBlogs = async (req, res) => {
 	}
 };
 
-exports.createBlog = async (req, res) => {
-	try {
-		const blog = await Blog.create(req.body);
-
-		if (!blog)
-			return res.status(400).json({
-				success: false,
-				error: "data nemegdsengvi.",
-			});
-
-		return res.status(200).json({
-			success: true,
-			blog: "amjilttai nemegdlee",
-			data: blog,
-		});
-	} catch (err) {
-		res.status(500).json({
-			success: false,
-			error: err,
-		});
-	}
-};
-
 exports.getBlog = async (req, res) => {
 	const { id } = req.params;
 	console.log(req.params);
@@ -63,6 +40,29 @@ exports.getBlog = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			blog,
+		});
+	} catch (err) {
+		res.status(500).json({
+			success: false,
+			error: err,
+		});
+	}
+};
+
+exports.createBlog = async (req, res) => {
+	try {
+		const blog = await Blog.create(req.body);
+
+		if (!blog)
+			return res.status(400).json({
+				success: false,
+				error: "data nemegdsengvi.",
+			});
+
+		return res.status(200).json({
+			success: true,
+			blog: "amjilttai nemegdlee",
+			data: blog,
 		});
 	} catch (err) {
 		res.status(500).json({

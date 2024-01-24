@@ -33,3 +33,41 @@ exports.createUser = async (req, res) => {
 };
 
 // login
+exports.login = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		if (!email || !password)
+			return res.status(400).json({
+				succes: false,
+				error: "Ta email eswel passwordoo damjuulna uu",
+			});
+
+		const user = await User.find({ email }).select("+password");
+
+		if (!user)
+			return res.status(400).json({
+				succes: false,
+				error: "Ta email eswel passwordoo shalgana uu",
+			});
+
+		const ok = user.checkPassword(password);
+
+		if (!ok)
+			return res.status(400).json({
+				succes: false,
+				error: "Ta passwordoo dahin shalgana uu",
+			});
+
+		return res.status(200).json({
+			succes: true,
+			user,
+			token: "",
+		});
+	} catch (err) {
+		return res.status(500).json({
+			succes: false,
+			error: err,
+		});
+	}
+};

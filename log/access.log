@@ -7,3 +7,5 @@
 ::ffff:127.0.0.1 - - [23/Jan/2024:01:23:16 +0000] "POST /users HTTP/1.1" 200 16 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [23/Jan/2024:01:34:58 +0000] "POST /users HTTP/1.1" - - "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [23/Jan/2024:01:34:59 +0000] "POST /users HTTP/1.1" 200 227 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [24/Jan/2024:00:48:19 +0000] "GET /blogs HTTP/1.1" 200 986 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [24/Jan/2024:01:29:58 +0000] "POST /users HTTP/1.1" 200 225 "-" "Thunder Client (https://www.thunderclient.com)"
