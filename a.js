@@ -5,4 +5,3 @@ class A {
 	}
 }
 
-// const a

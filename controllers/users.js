@@ -43,7 +43,9 @@ exports.login = async (req, res) => {
 				error: "Ta email eswel passwordoo damjuulna uu",
 			});
 
-		const user = await User.find({ email }).select("+password");
+		// select * from User where email=""
+		const user = await User.findOne({ email }).select("+password");
+		console.log(user);
 
 		if (!user)
 			return res.status(400).json({
