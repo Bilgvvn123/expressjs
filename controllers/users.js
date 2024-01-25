@@ -29,7 +29,12 @@ exports.createUser = async (req, res) => {
 			success: true,
 			user,
 		});
-	} catch (err) {}
+	} catch (err) {
+		return res.status(500).json({
+			success: false,
+			error: err.message,
+		});
+	}
 };
 
 // login
@@ -53,7 +58,7 @@ exports.login = async (req, res) => {
 				error: "Ta email eswel passwordoo shalgana uu",
 			});
 
-		const ok = user.checkPassword(password);
+		const ok = await user.checkPassword(password);
 
 		if (!ok)
 			return res.status(400).json({
@@ -62,14 +67,13 @@ exports.login = async (req, res) => {
 			});
 
 		return res.status(200).json({
-			succes: true,
-			user,
-			token: "",
+			success: true,
+			token: user.getJWT(),
 		});
 	} catch (err) {
 		return res.status(500).json({
 			succes: false,
-			error: err,
+			error: err.message,
 		});
 	}
 };

@@ -1,3 +1,8 @@
-const path = require("path");
+class A {
+	check() {
+		console.log("first");
+	}
+}
 
-console.log(path.join("C:/Users/Dell/Desktop/nodejs/expressjs", "/log"));
+const user = new A();
+user.check();

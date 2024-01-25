@@ -1,4 +1,5 @@
 const express = require("express");
+const { protect } = require("../middlewares/protect");
 
 const {
 	getBlogs,
@@ -10,7 +11,7 @@ const {
 const router = express.Router();
 
 // http://localhost:2030/blogs
-router.route("/").get(getBlogs).post(createBlog);
+router.route("/").get(protect, getBlogs).post(createBlog);
 
 // http://localhost:3000/blogs/:id
 router.route("/:id").get(getBlog).delete(deleteBlog);
