@@ -51,7 +51,12 @@ exports.getBlog = async (req, res) => {
 
 exports.createBlog = async (req, res) => {
 	try {
-		const blog = await Blog.create(req.body);
+		const blog = await Blog.create({
+			...req.body,
+			createdUser: req.erkagiinHuwiinDugaar,
+		});
+
+		console.log(req.erkagiinHuwiinDugaar);
 
 		if (!blog)
 			return res.status(400).json({

@@ -29,7 +29,7 @@ UserSchema.methods.checkPassword = async function (password) {
 };
 
 UserSchema.methods.getJWT = function () {
-	const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+	const token = jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
 		expiresIn: "30d",
 	});
 

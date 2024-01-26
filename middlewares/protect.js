@@ -11,6 +11,7 @@ exports.protect = (req, res, next) => {
 
 	token = token.split(" ")[1];
 	const ok = jwt.verify(token, process.env.JWT_SECRET);
+	console.log(ok);
 
 	if (!ok)
 		return res.status(401).json({
@@ -18,5 +19,6 @@ exports.protect = (req, res, next) => {
 			error: "Hvchingvi token baina",
 		});
 
+	req.erkagiinHuwiinDugaar = ok.userId;
 	next();
 };
