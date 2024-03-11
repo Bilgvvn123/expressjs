@@ -6,13 +6,28 @@ const BlogSchema = mongoose.Schema({
 		required: true,
 	},
 	description: String,
-	createdAt: {
-		type: Date,
-		default: Date.now,
+	photo: {
+		type: String,
+		default: "no-photo.png",
 	},
 	createdUser: {
 		type: mongoose.Types.ObjectId,
 		ref: "Users",
+	},
+	category: {
+		type: mongoose.Types.ObjectId,
+		ref: "Category",
+		required: [true, "Category-oo songono uu"],
+	},
+	likes: [
+		{
+			type: mongoose.Types.ObjectId,
+			ref: "users",
+		},
+	],
+	createdAt: {
+		type: Date,
+		default: Date.now,
 	},
 });
 

@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
 
 		if (!user)
 			return res.status(400).json({
-				succes: false,
+				success: false,
 				error: "Ta email eswel passwordoo shalgana uu",
 			});
 
@@ -62,17 +62,24 @@ exports.login = async (req, res) => {
 
 		if (!ok)
 			return res.status(400).json({
-				succes: false,
+				success: false,
 				error: "Ta passwordoo dahin shalgana uu",
 			});
 
-		return res.status(200).json({
-			success: true,
-			token: user.getJWT(),
-		});
+		const token = user.getJWT();
+
+		return res
+			.status(200)
+			.cookie("blog-app", token, {
+				expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+			})
+			.json({
+				success: true,
+				token,
+			});
 	} catch (err) {
 		return res.status(500).json({
-			succes: false,
+			success: false,
 			error: err.message,
 		});
 	}

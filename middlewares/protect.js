@@ -10,15 +10,14 @@ exports.protect = (req, res, next) => {
 		});
 
 	token = token.split(" ")[1];
-	const ok = jwt.verify(token, process.env.JWT_SECRET);
-	console.log(ok);
+	const userObj = jwt.verify(token, process.env.JWT_SECRET);
 
-	if (!ok)
+	if (!userObj)
 		return res.status(401).json({
 			success: false,
 			error: "Hvchingvi token baina",
 		});
 
-	req.erkagiinHuwiinDugaar = ok.userId;
+	req.loggedInUser = userObj;
 	next();
 };
